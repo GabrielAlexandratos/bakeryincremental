@@ -1,0 +1,17 @@
+export/macos/bin/assets/music/music-goes-here.txt
+export/macos/bin/assets/images/exclamationBadge.png
+export/macos/bin/assets/images/shopItemBox.png
+export/macos/bin/assets/images/rollingPin.png
+export/macos/bin/assets/images/arrow.png
+export/macos/bin/assets/images/jerryCoin.png
+export/macos/bin/assets/images/strawberry.png
+export/macos/bin/assets/images/testTab.png
+export/macos/bin/assets/sounds/sounds-go-here.txt
+export/macos/bin/assets/data/data-goes-here.txt
+export/macos/bin/flixel/sounds/beep.ogg
+export/macos/bin/flixel/sounds/flixel.ogg
+export/macos/bin/flixel/fonts/nokiafc22.ttf
+export/macos/bin/flixel/fonts/monsterrat.ttf
+export/macos/bin/flixel/images/ui/button.png
+export/macos/bin/flixel/images/logo/default.png
+export/macos/bin/manifest/default.json
