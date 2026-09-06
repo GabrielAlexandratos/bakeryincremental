@@ -6,7 +6,7 @@ import flixel.group.FlxSpriteGroup;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import logic.Economy;
-import logic.Upgrade;
+import upgrades.Upgrade;
 
 class UpgradeCard extends FlxSpriteGroup
 {
@@ -50,13 +50,15 @@ class UpgradeCard extends FlxSpriteGroup
     {
         super.update(elapsed);
 
-        var cost = upgrade.cost();
-        var affordable = Economy.money >= cost;
+		var maxed = upgrade.maxed();
+		var cost = upgrade.cost();
+		var affordable = !maxed && Economy.money >= cost;
 
-        costText.text = "$" + Std.int(cost);
+		costText.text = maxed ? "MAX" : "$" + Std.int(cost);
         alpha = affordable ? 1.0 : DIMMED;
 
         if (affordable && FlxG.mouse.justPressed && FlxG.mouse.overlaps(this))
             upgrade.buy();
+
     }
 }

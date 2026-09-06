@@ -18,6 +18,7 @@ import shop.ShopMenu;
 import storefront.Customer;
 import storefront.SignGuy;
 import storefront.ui.UpgradeBar;
+import upgrades.Upgrades;
 
 class PlayState extends FlxState
 {
@@ -58,6 +59,7 @@ class PlayState extends FlxState
 		super.create();
 
 		Economy.reset();
+		Upgrades.reset();
 
 		bgColor = 0xFF1C1C1C;
 
@@ -107,7 +109,7 @@ class PlayState extends FlxState
 
 	function spawnCustomer()
 	{
-		customers.recycle(Customer).start(FlxG.width * 1.5, FlxG.height - 220, Economy.ticket, popMoney);
+		customers.recycle(Customer).start(FlxG.width * 1.5, FlxG.height - 220, Upgrades.priceHike.ticket, popMoney);
 	}
 
 	function popMoney(x:Float, y:Float, amount:Float)
@@ -175,12 +177,12 @@ class PlayState extends FlxState
 
 		moneyText.text = "$" + Std.int(Economy.money);
 
-		if (Economy.autoSpawn)
+		if (Upgrades.advertise.autoSpawn)
 		{
 			spawnTimer += elapsed;
-			while (spawnTimer >= Economy.customerSpawnInterval)
+			while (spawnTimer >= Upgrades.advertise.spawnInterval)
 			{
-				spawnTimer -= Economy.customerSpawnInterval;
+				spawnTimer -= Upgrades.advertise.spawnInterval;
 				spawnCustomer();
 			}
 		}

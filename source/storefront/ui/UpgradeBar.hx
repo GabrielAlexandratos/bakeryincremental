@@ -4,7 +4,8 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.group.FlxSpriteGroup;
 import logic.Economy;
-import logic.Upgrade;
+import upgrades.Upgrade;
+import upgrades.Upgrades;
 
 class UpgradeBar extends FlxSpriteGroup
 {
@@ -45,26 +46,8 @@ class UpgradeBar extends FlxSpriteGroup
         addTab(AssetPaths.testTab__png);
         addTab(AssetPaths.testTab__png);
 
-        addCard({
-            name: "Advertise",
-            icon: AssetPaths.megaphone_icon__png,
-            cost: () -> Economy.customerFlowCost,
-            buy: Economy.buyFlow
-        });
-
-        addCard({
-            name: "Price Hike",
-            icon: AssetPaths.cash_icon__png,
-            cost: () -> Economy.ticketCost,
-            buy: Economy.buyTicket
-        });
-
-		addCard({
-			name: "Family meal",
-			icon: AssetPaths.testTab__png,
-			cost: () -> Economy.doubleChanceCost,
-			buy: Economy.buyDoubleChance
-		});
+		for (upgrade in Upgrades.all)
+			addCard(upgrade);
 
         selectTab(0);
     }

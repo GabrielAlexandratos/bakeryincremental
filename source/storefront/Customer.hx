@@ -4,6 +4,7 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.util.FlxColor;
 import logic.Economy;
+import upgrades.Upgrades;
 
 enum CustomerState
 {
@@ -56,7 +57,7 @@ class Customer extends FlxSprite
         state = Entering;
         payTimer = 0;
 		payDelay = PAY_TIME;
-		purchases = FlxG.random.bool(Economy.doubleChance * 100) ? 2 : 1;
+		purchases = FlxG.random.bool(Upgrades.familyMeal.chance * 100) ? 2 : 1;
 
         tint = FlxColor.fromHSB(FlxG.random.float(0, 360), 0.35, 0.95);
         color = tint;
