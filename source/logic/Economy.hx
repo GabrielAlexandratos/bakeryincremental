@@ -4,13 +4,15 @@ class Economy
 {
     public static var money(default, null):Float = 0;
 
+	public static var autoSpawn(default, null):Bool = false;
+
     public static var customerSpawnInterval(default, null):Float = 1.5;
     public static var customerFlowLevel(default, null):Int = 0;
 
     public static var ticket(default, null):Int = 1;
     public static var ticketLevel(default, null):Int = 0;
 
-    static inline var CUSTOMER_FLOW_BASE_COST = 10.0;
+	static inline var CUSTOMER_FLOW_BASE_COST = 20.0;
     static inline var CUSTOMER_FLOW_COST_GROWTH = 1.35;
     static inline var CUSTOMER_FLOW_STEP = 0.88;
     static inline var MIN_INTERVAL = 0.12;
@@ -51,7 +53,11 @@ class Economy
             return false;
 
         customerFlowLevel++;
-        customerSpawnInterval = Math.max(MIN_INTERVAL, customerSpawnInterval * CUSTOMER_FLOW_STEP);
+		if (!autoSpawn)
+			return false;
+		else 
+			customerSpawnInterval = Math.max(MIN_INTERVAL, customerSpawnInterval * CUSTOMER_FLOW_STEP);
+
         return true;
     }
 
@@ -68,6 +74,7 @@ class Economy
     public static function reset()
     {
         money = 0;
+		autoSpawn = false;
         customerSpawnInterval = 1.5;
         customerFlowLevel = 0;
         ticket = 1;

@@ -16,6 +16,7 @@ import ingredients.IngredientType;
 import logic.Economy;
 import shop.ShopMenu;
 import storefront.Customer;
+import storefront.SignGuy;
 import storefront.ui.UpgradeBar;
 
 class PlayState extends FlxState
@@ -40,6 +41,7 @@ class PlayState extends FlxState
 	var arrowRight:FlxSprite;
 	var arrowLeft:FlxSprite;
 
+	var signguy:SignGuy;
 	var customers:FlxTypedGroup<Customer>;
 	var popups:FlxTypedGroup<MoneyPopup>;
 	var coins:FlxTypedGroup<Coin>;
@@ -78,6 +80,9 @@ class PlayState extends FlxState
 
 		customers = new FlxTypedGroup<Customer>();
 		add(customers);
+
+		signguy = new SignGuy(FlxG.width + 100, FlxG.height - 220 + Customer.HEIGHT - SignGuy.HEIGHT, spawnCustomer);
+		add(signguy);
 
 		popups = new FlxTypedGroup<MoneyPopup>();
 		add(popups);
@@ -190,6 +195,15 @@ class PlayState extends FlxState
 			var mouse = FlxG.mouse.getWorldPosition();
 			add(Ingredient.random(mouse.x - Ingredient.RADIUS, mouse.y - Ingredient.RADIUS));
 			mouse.put();
+		}
+		if (Economy.autoSpawn)
+		{
+			spawnTimer += elapsed;
+			while (spawnTimer >= Economy.customerSpawnInterval)
+			{
+				spawnTimer -= Economy.customerSpawnInterval;
+				spawnCustomer();
+			}
 		}
 	}
 }
