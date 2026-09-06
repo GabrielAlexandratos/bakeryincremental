@@ -9,7 +9,7 @@ class SignGuy extends FlxSprite
     public static inline var WIDTH = 28;
     public static inline var HEIGHT = 56;
 
-    static inline var COOLDOWN = 0.1;
+	static inline var COOLDOWN = 0.5;
 
     static inline var POP = 0.14;
 

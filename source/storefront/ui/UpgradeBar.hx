@@ -59,6 +59,13 @@ class UpgradeBar extends FlxSpriteGroup
             buy: Economy.buyTicket
         });
 
+		addCard({
+			name: "Family meal",
+			icon: AssetPaths.testTab__png,
+			cost: () -> Economy.doubleChanceCost,
+			buy: Economy.buyDoubleChance
+		});
+
         selectTab(0);
     }
 

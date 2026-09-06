@@ -21,6 +21,8 @@ class Customer extends FlxSprite
     static inline var WALK_DISTANCE = 420;
     static inline var PAY_TIME = 0.3;
 
+	static inline var REPEAT_DELAY = 0.2;
+
     static inline var FLASH_TIME = 0.14;
     static inline var FLASH_STRETCH = 0.3;
     static inline var FLASH_SQUEEZE = 0.12;
@@ -31,6 +33,9 @@ class Customer extends FlxSprite
     var onPay:(Float, Float, Float)->Void = null;
     var state = Leaving;
     var payTimer = 0.0;
+	var payDelay = 0.0;
+	var purchases = 1;
+
 
     var tint = FlxColor.WHITE;
     var baseY = 0.0;
@@ -50,6 +55,8 @@ class Customer extends FlxSprite
 
         state = Entering;
         payTimer = 0;
+		payDelay = PAY_TIME;
+		purchases = FlxG.random.bool(Economy.doubleChance * 100) ? 2 : 1;
 
         tint = FlxColor.fromHSB(FlxG.random.float(0, 360), 0.35, 0.95);
         color = tint;
@@ -82,8 +89,18 @@ class Customer extends FlxSprite
                     Economy.earn(ticket);
                     onPay(x + WIDTH / 2, y, ticket);
                     flashTimer = FLASH_TIME;
-                    velocity.x = WALK_SPEED;
-                    state = Leaving;
+					purchases--;
+
+					if (purchases > 0)
+					{
+						payTimer = 0;
+						payDelay = REPEAT_DELAY;
+					}
+					else
+					{
+						velocity.x = WALK_SPEED;
+						state = Leaving;
+					}
                 }
 
             case Leaving:

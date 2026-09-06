@@ -175,11 +175,14 @@ class PlayState extends FlxState
 
 		moneyText.text = "$" + Std.int(Economy.money);
 
-		spawnTimer += elapsed;
-		while (spawnTimer >= Economy.customerSpawnInterval)
+		if (Economy.autoSpawn)
 		{
-			spawnTimer -= Economy.customerSpawnInterval;
-			spawnCustomer();
+			spawnTimer += elapsed;
+			while (spawnTimer >= Economy.customerSpawnInterval)
+			{
+				spawnTimer -= Economy.customerSpawnInterval;
+				spawnCustomer();
+			}
 		}
 
 		if (FlxG.mouse.justPressed && !panning)
@@ -195,15 +198,6 @@ class PlayState extends FlxState
 			var mouse = FlxG.mouse.getWorldPosition();
 			add(Ingredient.random(mouse.x - Ingredient.RADIUS, mouse.y - Ingredient.RADIUS));
 			mouse.put();
-		}
-		if (Economy.autoSpawn)
-		{
-			spawnTimer += elapsed;
-			while (spawnTimer >= Economy.customerSpawnInterval)
-			{
-				spawnTimer -= Economy.customerSpawnInterval;
-				spawnCustomer();
-			}
 		}
 	}
 }
