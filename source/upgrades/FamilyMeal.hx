@@ -9,7 +9,7 @@ class FamilyMeal extends Upgrade
 
     public function new()
     {
-        super("Family meal", AssetPaths.testTab__png, 40, 1.5);
+		super("Family meal", AssetPaths.missingImage__png, 40, 1.5);
     }
 
     override public function maxed():Bool

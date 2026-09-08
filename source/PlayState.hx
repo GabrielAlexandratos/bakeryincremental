@@ -8,12 +8,14 @@ import flixel.text.FlxText;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
+import flixel.util.FlxSort;
 import flixel.util.FlxSpriteUtil;
 import fx.Coin;
 import fx.MoneyPopup;
 import ingredients.Ingredient;
 import ingredients.IngredientType;
 import logic.Economy;
+import logic.Tills;
 import shop.ShopMenu;
 import storefront.Customer;
 import storefront.SignGuy;
@@ -59,6 +61,7 @@ class PlayState extends FlxState
 		super.create();
 
 		Economy.reset();
+		Tills.reset();
 		Upgrades.reset();
 
 		bgColor = 0xFF1C1C1C;
@@ -110,6 +113,7 @@ class PlayState extends FlxState
 	function spawnCustomer()
 	{
 		customers.recycle(Customer).start(FlxG.width * 1.5, FlxG.height - 220, Upgrades.priceHike.ticket, popMoney);
+		customers.sort(FlxSort.byY, FlxSort.ASCENDING);
 	}
 
 	function popMoney(x:Float, y:Float, amount:Float)
@@ -201,5 +205,7 @@ class PlayState extends FlxState
 			add(Ingredient.random(mouse.x - Ingredient.RADIUS, mouse.y - Ingredient.RADIUS));
 			mouse.put();
 		}
+		if (FlxG.keys.justPressed.ONE)
+			Economy.earn(10000);
 	}
 }

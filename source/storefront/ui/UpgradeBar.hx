@@ -42,9 +42,9 @@ class UpgradeBar extends FlxSpriteGroup
         edge.makeGraphic(FlxG.width, EDGE_HEIGHT, EDGE);
         add(edge);
 
-        addTab(AssetPaths.testTab__png);
-        addTab(AssetPaths.testTab__png);
-        addTab(AssetPaths.testTab__png);
+		addTab(AssetPaths.missingImage__png);
+		addTab(AssetPaths.missingImage__png);
+		addTab(AssetPaths.missingImage__png);
 
 		for (upgrade in Upgrades.all)
 			addCard(upgrade);

@@ -31,7 +31,7 @@ class Advertise extends Upgrade
     override public function reset()
     {
         super.reset();
-        autoSpawn = true;
+		autoSpawn = false;
         spawnInterval = START_INTERVAL;
     }
 }
